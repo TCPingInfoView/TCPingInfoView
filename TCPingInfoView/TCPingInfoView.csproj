@@ -16,6 +16,7 @@
 		<PackageReference Include="ReactiveUI.Events.WPF" Version="11.5.35" />
 		<PackageReference Include="ReactiveUI.WPF" Version="11.5.35" />
 		<PackageReference Include="Syncfusion.SfGrid.WPF" Version="18.2.0.58" />
+		<PackageReference Include="WPFLocalizeExtension" Version="3.8.0" />
 	</ItemGroup>
 
 	<ItemGroup>
