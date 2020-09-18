@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>Resources\TCPing.ico</ApplicationIcon>
+		<Version>2.0.0</Version>
+		<Authors>HMBSbige</Authors>
+		<Product>TCPingInfoView</Product>
+		<Copyright>Copyright © HMBSbige 2018 - 2020</Copyright>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore" Version="1.0.13" />
+		<PackageReference Include="ReactiveUI.Events.WPF" Version="11.5.35" />
+		<PackageReference Include="ReactiveUI.WPF" Version="11.5.35" />
+		<PackageReference Include="Syncfusion.SfGrid.WPF" Version="18.2.0.58" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PingClientBase\PingClientBase.csproj" />
+		<ProjectReference Include="..\Infrastructure\SingleInstance\SingleInstance.csproj" />
+		<ProjectReference Include="..\TCPingInfoView.Shared\TCPingInfoView.Shared.csproj" />
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;&#xD;&#xA;SyncfusionLicenseRegister.bat PreBuild App.xaml.cs" />
+	</Target>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="cd &quot;$(ProjectDir)&quot; &#xD;&#xA;&#xD;&#xA;SyncfusionLicenseRegister.bat PostBuild App.xaml.cs" />
+	</Target>
+
+</Project>
