@@ -4,3 +4,9 @@
 [submodule "TCPingClient"]
 	path = TCPingClient
 	url = https://github.com/TCPingInfoView/TCPingClient
+[submodule "SingleInstance"]
+	path = SingleInstance
+	url = https://github.com/HMBSbige/SingleInstance
+[submodule "Build/DotNetDllPathPatcher"]
+	path = Build/DotNetDllPathPatcher
+	url = https://github.com/HMBSbige/DotNetDllPathPatcher
