@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
+using PingClientBase;
 
 namespace TCPingInfoView.Utils
 {
-	public static class New<T> where T : new()
+	public static class NewIPingClient
 	{
-		public static readonly Func<T> Instance = Expression.Lambda<Func<T>>(Expression.New(typeof(T))).Compile();
+		public static Func<IPingClient> GetDelegate(Type type) => Expression.Lambda<Func<IPingClient>>(Expression.New(type)).Compile();
 	}
 }
