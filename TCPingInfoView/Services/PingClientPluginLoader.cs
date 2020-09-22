@@ -1,7 +1,7 @@
+﻿using Microsoft.Extensions.Logging;
 using PingClientBase;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.Loader;
 using System.Threading.Tasks;
@@ -12,7 +12,14 @@ namespace TCPingInfoView.Services
 {
 	public class PingClientPluginLoader : IPluginLoader
 	{
+		private readonly ILogger _logger;
+
 		public readonly Dictionary<string, Func<IPingClient>> Plugins = new Dictionary<string, Func<IPingClient>>();
+
+		public PingClientPluginLoader(ILogger<PingClientPluginLoader> logger)
+		{
+			_logger = logger;
+		}
 
 		public async ValueTask LoadPluginsAsync(string dir)
 		{
@@ -33,7 +40,10 @@ namespace TCPingInfoView.Services
 				var exports = assembly.GetTypes();
 				foreach (var t in exports)
 				{
-					if (!type.IsAssignableFrom(t)) continue;
+					if (!type.IsAssignableFrom(t))
+					{
+						continue;
+					}
 
 					if (Activator.CreateInstance(t) is IPingClient client)
 					{
@@ -43,7 +53,7 @@ namespace TCPingInfoView.Services
 			}
 			catch (Exception ex)
 			{
-				Debug.WriteLine(ex);
+				_logger.LogWarning($@"{ex}");
 			}
 
 			return default;
