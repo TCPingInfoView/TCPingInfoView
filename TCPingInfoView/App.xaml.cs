@@ -90,16 +90,17 @@ namespace TCPingInfoView
 
 		private void ConfigureServices(IServiceCollection services)
 		{
+			const string outputTemplate = @"[{Timestamp:yyyy-MM-dd HH:mm:ss}] [{Level}] {Message:lj}{NewLine}{Exception}";
 			Log.Logger = new LoggerConfiguration()
 #if DEBUG
 				.MinimumLevel.Debug()
-				.WriteTo.Debug()
+				.WriteTo.Debug(outputTemplate: outputTemplate)
 #else
 				.MinimumLevel.Information()
 #endif
 				.MinimumLevel.Override(@"Microsoft", LogEventLevel.Information)
 				.Enrich.FromLogContext()
-				.WriteTo.Async(c => c.File(@"Logs/TCPingInfoView.log"))
+				.WriteTo.Async(c => c.File(@"Logs/TCPingInfoView.log", outputTemplate: outputTemplate))
 				.CreateLogger();
 
 			services.AddSingleton<MainWindow>();

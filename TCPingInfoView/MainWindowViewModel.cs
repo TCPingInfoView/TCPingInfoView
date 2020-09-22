@@ -31,7 +31,7 @@ namespace TCPingInfoView
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError($@"Load plugins Error: {ex}");
+				_logger.LogError(ex, @"Load plugins Error");
 			}
 		}
 
