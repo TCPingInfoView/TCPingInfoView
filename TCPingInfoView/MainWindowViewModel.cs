@@ -19,7 +19,7 @@ namespace TCPingInfoView
 			_logger = logger;
 			_pluginLoader = pluginLoader;
 
-			ReloadDefaultPlugins().Wait();
+			ReloadDefaultPlugins().NoWarning();
 		}
 
 		private async Task ReloadDefaultPlugins()
@@ -27,6 +27,7 @@ namespace TCPingInfoView
 			_logger.LogInformation(@"Loading plugins");
 			try
 			{
+				await _pluginLoader.Clear();
 				await _pluginLoader.LoadPluginsAsync(@"plugins");
 			}
 			catch (Exception ex)

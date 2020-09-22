@@ -3,6 +3,7 @@ using PingClientBase;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Loader;
 using System.Threading.Tasks;
 using TCPingInfoView.Interfaces;
@@ -14,7 +15,9 @@ namespace TCPingInfoView.Services
 	{
 		private readonly ILogger _logger;
 
-		public readonly Dictionary<string, Func<IPingClient>> Plugins = new Dictionary<string, Func<IPingClient>>();
+		public Dictionary<string, Func<IPingClient>> Plugins { get; } = new Dictionary<string, Func<IPingClient>>();
+
+		private static readonly Type PingClientType = typeof(IPingClient);
 
 		public PingClientPluginLoader(ILogger<PingClientPluginLoader> logger)
 		{
@@ -36,18 +39,22 @@ namespace TCPingInfoView.Services
 			{
 				path = Path.GetFullPath(path);
 				var assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(path);
-				var type = typeof(IPingClient);
 				var exports = assembly.GetTypes();
+
 				foreach (var t in exports)
 				{
-					if (!type.IsAssignableFrom(t))
+					if (!IsPingClient(t))
 					{
 						continue;
 					}
 
-					if (Activator.CreateInstance(t) is IPingClient client)
+					var @delegate = New<IPingClient>.GetDelegate(t);
+					var client = @delegate();
+
+					if (!string.IsNullOrWhiteSpace(client.ProtocolName))
 					{
-						Plugins[client.ProtocolName] = New<IPingClient>.GetDelegate(t);
+						Plugins[client.ProtocolName] = @delegate;
+						_logger.LogInformation($@"{client.ProtocolName} plugin successfully loaded");
 					}
 				}
 			}
@@ -63,6 +70,17 @@ namespace TCPingInfoView.Services
 		{
 			Plugins.Clear();
 			return default;
+		}
+
+		private static bool IsPingClient(Type type)
+		{
+			var typeInfo = type.GetTypeInfo();
+
+			return
+				typeInfo.IsClass &&
+				!typeInfo.IsAbstract &&
+				!typeInfo.IsGenericType &&
+				PingClientType.IsAssignableFrom(type);
 		}
 	}
 }

@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace TCPingInfoView.Utils
 {
@@ -36,12 +38,18 @@ namespace TCPingInfoView.Utils
 				{
 					hash1 = ((hash1 << 5) + hash1) ^ str[i];
 					if (i == str.Length - 1)
+					{
 						break;
+					}
+
 					hash2 = ((hash2 << 5) + hash2) ^ str[i + 1];
 				}
 
 				return hash1 + hash2 * 1566083941;
 			}
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static void NoWarning(this Task _) { }
 	}
 }

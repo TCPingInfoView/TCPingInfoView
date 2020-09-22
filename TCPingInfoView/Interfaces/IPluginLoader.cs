@@ -1,9 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using PingClientBase;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TCPingInfoView.Interfaces
 {
 	public interface IPluginLoader : IService
 	{
+		/// <summary>
+		/// 已加载的插件
+		/// </summary>
+		Dictionary<string, Func<IPingClient>> Plugins { get; }
+
 		/// <summary>
 		/// 加载目录中所有插件
 		/// </summary>

@@ -100,7 +100,11 @@ namespace TCPingInfoView
 #endif
 				.MinimumLevel.Override(@"Microsoft", LogEventLevel.Information)
 				.Enrich.FromLogContext()
-				.WriteTo.Async(c => c.File(@"Logs/TCPingInfoView.log", outputTemplate: outputTemplate))
+				.WriteTo.Async(c => c.File(@"Logs/TCPingInfoView.log",
+					outputTemplate: outputTemplate,
+					rollOnFileSizeLimit: true,
+					retainedFileCountLimit: 2,
+					fileSizeLimitBytes: 10 * 1024 * 1024))
 				.CreateLogger();
 
 			services.AddSingleton<MainWindow>();
