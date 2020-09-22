@@ -1,10 +1,10 @@
-﻿using System;
+using PingClientBase;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Loader;
 using System.Threading.Tasks;
-using PingClientBase;
 using TCPingInfoView.Interfaces;
 using TCPingInfoView.Utils;
 
@@ -37,7 +37,7 @@ namespace TCPingInfoView.Services
 
 					if (Activator.CreateInstance(t) is IPingClient client)
 					{
-						Plugins[client.ProtocolName] = NewIPingClient.GetDelegate(t);
+						Plugins[client.ProtocolName] = New<IPingClient>.GetDelegate(t);
 					}
 				}
 			}
