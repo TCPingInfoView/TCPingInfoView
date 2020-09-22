@@ -10,6 +10,9 @@
 		<Product>TCPingInfoView</Product>
 		<Copyright>Copyright © HMBSbige 2018 - 2020</Copyright>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Resources\TCPing.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore" Version="1.0.13" />
@@ -29,6 +32,25 @@
 		<ProjectReference Include="..\PingClientBase\PingClientBase.csproj" />
 		<ProjectReference Include="..\Infrastructure\SingleInstance\SingleInstance.csproj" />
 		<ProjectReference Include="..\TCPingInfoView.Shared\TCPingInfoView.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Resources\TCPing.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="I18n\Strings.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Strings.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="I18n\Strings.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">

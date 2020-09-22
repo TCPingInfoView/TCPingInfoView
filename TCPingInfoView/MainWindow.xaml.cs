@@ -6,10 +6,10 @@ namespace TCPingInfoView
 {
 	public partial class MainWindow
 	{
-		public MainWindow(ILogger<MainWindow> logger, IPluginLoader pluginLoader)
+		public MainWindow(ILogger<MainWindow> logger, IPluginLoader pluginLoader, ILocalize localize)
 		{
 			InitializeComponent();
-			ViewModel = new MainWindowViewModel(this, logger, pluginLoader);
+			ViewModel = new MainWindowViewModel(this, logger, pluginLoader, localize);
 
 			this.WhenActivated(d =>
 			{
