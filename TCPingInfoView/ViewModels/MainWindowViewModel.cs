@@ -2,11 +2,12 @@
 using ReactiveUI;
 using System;
 using System.Globalization;
+using System.Reactive;
 using System.Threading.Tasks;
 using TCPingInfoView.Interfaces;
 using TCPingInfoView.Utils;
 
-namespace TCPingInfoView
+namespace TCPingInfoView.ViewModels
 {
 	public class MainWindowViewModel : ReactiveObject
 	{
@@ -14,6 +15,12 @@ namespace TCPingInfoView
 		private readonly ILogger _logger;
 		private readonly IPluginLoader _pluginLoader;
 		private readonly ILocalize _localize;
+
+		#region Command
+
+		public ReactiveCommand<Unit, Unit> ShowWindowCommand { get; }
+
+		#endregion
 
 		public MainWindowViewModel(MainWindow window, ILogger logger, IPluginLoader pluginLoader, ILocalize localize)
 		{
@@ -23,6 +30,8 @@ namespace TCPingInfoView
 			_localize = localize;
 
 			ReloadDefaultPlugins().NoWarning();
+
+			ShowWindowCommand = ReactiveCommand.Create(ShowWindow);
 		}
 
 		private async Task ReloadDefaultPlugins()
@@ -39,7 +48,7 @@ namespace TCPingInfoView
 			}
 		}
 
-		public void ShowWindow()
+		private void ShowWindow()
 		{
 			_window.ShowWindow();
 		}
