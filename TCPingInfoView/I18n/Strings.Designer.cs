@@ -70,7 +70,43 @@ namespace TCPingInfoView.I18n {
         }
         
         /// <summary>
-        ///   查找类似 _Show 的本地化字符串。
+        ///   查找类似 _File 的本地化字符串。
+        /// </summary>
+        public static string FileMenuItem_Header {
+            get {
+                return ResourceManager.GetString("FileMenuItem_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 _Load 的本地化字符串。
+        /// </summary>
+        public static string LoadMenuItem_Header {
+            get {
+                return ResourceManager.GetString("LoadMenuItem_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Segoe UI 的本地化字符串。
+        /// </summary>
+        public static string MetroFontFamily {
+            get {
+                return ResourceManager.GetString("MetroFontFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 _Save 的本地化字符串。
+        /// </summary>
+        public static string SaveMenuItem_Header {
+            get {
+                return ResourceManager.GetString("SaveMenuItem_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 _Show Main Window 的本地化字符串。
         /// </summary>
         public static string ShowMenuItem_Header {
             get {

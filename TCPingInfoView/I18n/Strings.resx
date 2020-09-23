@@ -121,6 +121,18 @@
     <value>_Exit</value>
   </data>
   <data name="ShowMenuItem_Header" xml:space="preserve">
-    <value>_Show</value>
+    <value>_Show Main Window</value>
+  </data>
+  <data name="MetroFontFamily" xml:space="preserve">
+    <value>Segoe UI</value>
+  </data>
+  <data name="FileMenuItem_Header" xml:space="preserve">
+    <value>_File</value>
+  </data>
+  <data name="LoadMenuItem_Header" xml:space="preserve">
+    <value>_Load</value>
+  </data>
+  <data name="SaveMenuItem_Header" xml:space="preserve">
+	  <value>_Save</value>
   </data>
 </root>

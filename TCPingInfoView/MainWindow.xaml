@@ -9,6 +9,7 @@
 	xmlns:reactiveUi="http://reactiveui.net"
 	xmlns:tb="http://www.hardcodet.net/taskbar"
 	xmlns:lex="http://wpflocalizeextension.codeplex.com"
+	xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 	xmlns:sfSkinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
 	lex:LocalizeDictionary.DesignCulture="zh-CN"
 	lex:ResxLocalizationProvider.DefaultAssembly="TCPingInfoView"
@@ -17,21 +18,42 @@
 	Title="TCPingInfoView"
 	Height="700" Width="1200"
 	WindowStartupLocation="CenterScreen"
-	sfSkinManager:SfSkinManager.VisualStyle="VisualStudio2015"
+	syncfusion:SkinStorage.MetroFontFamily="{lex:Loc Key=MetroFontFamily}"
 >
-	
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						Visibility="Visible"
 						ToolTipText="TCPingInfoView"
 						IconSource="Resources/TCPing.ico"
-						MenuActivation="RightClick">
+						MenuActivation="RightClick"
+						>
 			<tb:TaskbarIcon.ContextMenu>
-				<ContextMenu>
+				<ContextMenu sfSkinManager:SfSkinManager.VisualStyle="Metro" FontSize="14">
 					<MenuItem x:Name="ShowMenuItem" Header="{lex:Loc}" />
 					<MenuItem x:Name="ExitMenuItem" Header="{lex:Loc}" />
 				</ContextMenu>
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
+		<DockPanel>
+			<syncfusion:MenuAdv DockPanel.Dock="Top"
+								IsScrollEnabled="True"
+								ExpandMode="ExpandOnClick"
+								Orientation="Horizontal"
+								PopUpAnimationType="None"
+								syncfusion:SkinStorage.VisualStyle="Metro"
+								Background="Transparent"
+								FontSize="14"
+								>
+				<syncfusion:MenuItemAdv x:Name="FileMenuItem" Header="{lex:Loc}" >
+					<syncfusion:MenuItemAdv x:Name="LoadMenuItem" Header="{lex:Loc}" />
+					<syncfusion:MenuItemAdv x:Name="SaveMenuItem" Header="{lex:Loc}" />
+					<syncfusion:MenuItemSeparator />
+					<syncfusion:MenuItemAdv Header="{lex:Loc Key=ExitMenuItem_Header}" />
+				</syncfusion:MenuItemAdv>
+			</syncfusion:MenuAdv>
+			<syncfusion:SfDataGrid >
+				
+			</syncfusion:SfDataGrid>
+		</DockPanel>
 	</Grid>
 </reactiveUi:ReactiveWindow>

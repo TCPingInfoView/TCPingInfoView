@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReactiveUI;
-using Syncfusion.SfSkinManager;
 using TCPingInfoView.Interfaces;
 
 namespace TCPingInfoView
@@ -9,7 +8,6 @@ namespace TCPingInfoView
 	{
 		public MainWindow(ILogger<MainWindow> logger, IPluginLoader pluginLoader, ILocalize localize)
 		{
-			SfSkinManager.ApplyStylesOnApplication = true;
 			InitializeComponent();
 			ViewModel = new MainWindowViewModel(this, logger, pluginLoader, localize);
 

@@ -8,17 +8,15 @@ namespace TCPingInfoView.Services
 	{
 		private readonly ILogger _logger;
 
-		private CultureInfo _current;
-
 		public CultureInfo Current
 		{
-			get => _current;
+			get => WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture;
 			set
 			{
-				if (!Equals(_current, value))
+				var current = WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture;
+				if (!Equals(current, value))
 				{
-					_logger.LogDebug($@"Language {_current} changed to {value}");
-					_current = value;
+					_logger.LogDebug($@"Language {current} changed to {value}");
 					WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = value;
 				}
 			}
