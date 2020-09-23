@@ -11,6 +11,7 @@
 	xmlns:sfSkinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
 	xmlns:viewModels="clr-namespace:TCPingInfoView.ViewModels"
 	xmlns:views="clr-namespace:TCPingInfoView.Views"
+	xmlns:system="clr-namespace:System;assembly=System.Runtime"
 	lex:LocalizeDictionary.DesignCulture="zh-CN"
 	lex:ResxLocalizationProvider.DefaultAssembly="TCPingInfoView"
 	lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -20,24 +21,25 @@
 	WindowStartupLocation="CenterScreen"
 	AllowsTransparency="True"
 	Icon="Resources/TCPing.ico"
+	IconAlignment="Left"
+	BorderBrush="{DynamicResource MetroThemeBrush}"
 	TitleBarBackground="{DynamicResource MetroThemeBrush}"
 	TitleBarForeground="White"
 	TitleTextAlignment="Center"
 	TitleFontSize="16"
 	TitleBarHeight="40"
-	IconAlignment="Left"
-	CornerRadius="0,0,8,8"
-	ResizeBorderThickness="0.618"
-	syncfusion:SkinStorage.VisualStyle="Metro"
-	syncfusion:SkinStorage.MetroBrush="{DynamicResource MetroThemeBrush}"
-	syncfusion:SkinStorage.MetroForegroundBrush="{DynamicResource MetroThemeBrush}"
-	syncfusion:SkinStorage.MetroFontFamily="{lex:Loc Key=MetroFontFamily}"
+	CornerRadius="8"
+	ResizeBorderThickness="0"
+	sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
+	BorderThickness="0"
 >
 	<Window.Resources>
 		<Thickness x:Key="ButtonBorderThickness">0</Thickness>
 		<Thickness x:Key="ButtonPadding">5</Thickness>
 		<Thickness x:Key="ButtonMargin">0,0,5,0</Thickness>
-		<Brush x:Key="MetroThemeBrush">#2196f3</Brush>
+		<Brush x:Key="MetroThemeBrush">DodgerBlue</Brush>
+		<Brush x:Key="ToolButtonBrush">Black</Brush>
+		<system:Double x:Key="MenuItemFontSize">14</system:Double>
 	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
@@ -48,39 +50,35 @@
 						>
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu
-					sfSkinManager:SfSkinManager.VisualStyle="Metro"
-					FontSize="14">
+					sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
+					FontSize="{StaticResource MenuItemFontSize}">
 					<MenuItem x:Name="ShowMenuItem" Header="{lex:Loc}" />
 					<MenuItem x:Name="ExitMenuItem" Header="{lex:Loc}" />
 				</ContextMenu>
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
 		<DockPanel>
-			<syncfusion:MenuAdv DockPanel.Dock="Top"
-								IsScrollEnabled="True"
-								ExpandMode="ExpandOnClick"
-								Orientation="Horizontal"
-								PopUpAnimationType="None"
+			<Menu DockPanel.Dock="Top"
 								Background="Transparent"
-								FontSize="14"
+								FontSize="{StaticResource MenuItemFontSize}"
+								FontFamily="{lex:Loc Key=MetroFontFamily}"
 								BorderThickness="0"
-								Margin="3"
-								>
-				<syncfusion:MenuItemAdv x:Name="FileMenuItem" Header="{lex:Loc}" >
-					<syncfusion:MenuItemAdv x:Name="LoadMenuItem" Header="{lex:Loc}" />
-					<syncfusion:MenuItemAdv x:Name="SaveMenuItem" Header="{lex:Loc}" />
-					<syncfusion:MenuItemSeparator />
-					<syncfusion:MenuItemAdv Header="{lex:Loc Key=ExitMenuItem_Header}" />
-				</syncfusion:MenuItemAdv>
-			</syncfusion:MenuAdv>
-			<WrapPanel DockPanel.Dock="Top" Margin="5,5,0,5">
+								Margin="3">
+				<MenuItem x:Name="FileMenuItem" Header="{lex:Loc}" >
+					<MenuItem x:Name="LoadMenuItem" Header="{lex:Loc}" />
+					<MenuItem x:Name="SaveMenuItem" Header="{lex:Loc}" />
+					<Separator/>
+					<MenuItem Header="{lex:Loc Key=ExitMenuItem_Header}" />
+				</MenuItem>
+			</Menu>
+			<WrapPanel DockPanel.Dock="Top" Margin="5,5,0,5" sfSkinManager:SfSkinManager.VisualStyle="MaterialLight">
 				<Button Background="Transparent"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
 					<Viewbox Width="48" Height="48">
 						<Canvas Width="24" Height="24">
-							<Path Fill="Black" Data="M8,7.71L18,12L8,16.29V12.95L15.14,12L8,11.05V7.71M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
+							<Path Fill="{DynamicResource ToolButtonBrush}" Data="M8,7.71L18,12L8,16.29V12.95L15.14,12L8,11.05V7.71M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
 						</Canvas>
 					</Viewbox>
 				</Button>
@@ -90,7 +88,7 @@
 						Margin="{StaticResource ButtonMargin}">
 					<Viewbox Width="48" Height="48">
 						<Canvas Width="24" Height="24">
-							<Path Fill="Black" Data="M20,14H4V10H20" />
+							<Path Fill="{DynamicResource ToolButtonBrush}" Data="M20,14H4V10H20" />
 						</Canvas>
 					</Viewbox>
 				</Button>
@@ -100,7 +98,7 @@
 						Margin="{StaticResource ButtonMargin}">
 					<Viewbox Width="48" Height="48">
 						<Canvas Width="24" Height="24">
-							<Path Fill="Black" Data="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z" />
+							<Path Fill="{DynamicResource ToolButtonBrush}" Data="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z" />
 						</Canvas>
 					</Viewbox>
 				</Button>
