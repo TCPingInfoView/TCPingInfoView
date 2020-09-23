@@ -18,6 +18,7 @@
 	Title="TCPingInfoView"
 	Height="700" Width="1200"
 	WindowStartupLocation="CenterScreen"
+	syncfusion:SkinStorage.VisualStyle="Metro" 
 	syncfusion:SkinStorage.MetroFontFamily="{lex:Loc Key=MetroFontFamily}"
 >
 	<Grid>
@@ -40,7 +41,6 @@
 								ExpandMode="ExpandOnClick"
 								Orientation="Horizontal"
 								PopUpAnimationType="None"
-								syncfusion:SkinStorage.VisualStyle="Metro"
 								Background="Transparent"
 								FontSize="14"
 								>
