@@ -1,16 +1,16 @@
-﻿<reactiveUi:ReactiveWindow
+﻿<views:ReactiveChromelessWindow
 	x:TypeArguments="viewModels:MainWindowViewModel"
 	x:Class="TCPingInfoView.MainWindow"
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:reactiveUi="http://reactiveui.net"
 	xmlns:tb="http://www.hardcodet.net/taskbar"
 	xmlns:lex="http://wpflocalizeextension.codeplex.com"
 	xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
 	xmlns:sfSkinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
 	xmlns:viewModels="clr-namespace:TCPingInfoView.ViewModels"
+	xmlns:views="clr-namespace:TCPingInfoView.Views"
 	lex:LocalizeDictionary.DesignCulture="zh-CN"
 	lex:ResxLocalizationProvider.DefaultAssembly="TCPingInfoView"
 	lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -18,7 +18,8 @@
 	Title="TCPingInfoView"
 	Height="700" Width="1200"
 	WindowStartupLocation="CenterScreen"
-	syncfusion:SkinStorage.VisualStyle="Metro" 
+	Icon="Resources/TCPing.ico"
+	syncfusion:SkinStorage.VisualStyle="Metro"
 	syncfusion:SkinStorage.MetroFontFamily="{lex:Loc Key=MetroFontFamily}"
 >
 	<Grid>
@@ -51,9 +52,11 @@
 					<syncfusion:MenuItemAdv Header="{lex:Loc Key=ExitMenuItem_Header}" />
 				</syncfusion:MenuItemAdv>
 			</syncfusion:MenuAdv>
-			<syncfusion:SfDataGrid >
+			<syncfusion:SfDataGrid 
+				BorderThickness="0"
+			>
 				
 			</syncfusion:SfDataGrid>
 		</DockPanel>
 	</Grid>
-</reactiveUi:ReactiveWindow>
+</views:ReactiveChromelessWindow>
