@@ -18,6 +18,10 @@ namespace TCPingInfoView.Services
 				{
 					_logger.LogDebug($@"Language {current} changed to {value}");
 					WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture = value;
+					System.Threading.Thread.CurrentThread.CurrentCulture = value;
+					System.Threading.Thread.CurrentThread.CurrentUICulture = value;
+					CultureInfo.DefaultThreadCurrentCulture = value;
+					CultureInfo.DefaultThreadCurrentUICulture = value;
 				}
 			}
 		}
