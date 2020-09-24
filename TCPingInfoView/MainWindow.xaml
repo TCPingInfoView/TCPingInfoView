@@ -11,7 +11,6 @@
 	xmlns:sfSkinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
 	xmlns:viewModels="clr-namespace:TCPingInfoView.ViewModels"
 	xmlns:views="clr-namespace:TCPingInfoView.Views"
-	xmlns:system="clr-namespace:System;assembly=System.Runtime"
 	lex:LocalizeDictionary.DesignCulture="zh-CN"
 	lex:ResxLocalizationProvider.DefaultAssembly="TCPingInfoView"
 	lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -20,27 +19,19 @@
 	Height="700" Width="1200"
 	WindowStartupLocation="CenterScreen"
 	AllowsTransparency="True"
+	SnapsToDevicePixels="True"
 	Icon="Resources/TCPing.ico"
-	IconAlignment="Left"
-	BorderBrush="{DynamicResource MetroThemeBrush}"
-	TitleBarBackground="{DynamicResource MetroThemeBrush}"
+	BorderBrush="{StaticResource MetroThemeBrush}"
+	TitleBarBackground="{StaticResource MetroThemeBrush}"
 	TitleBarForeground="White"
 	TitleTextAlignment="Center"
 	TitleFontSize="16"
-	TitleBarHeight="40"
-	CornerRadius="8"
+	TitleBarHeight="36"
+	UseNativeChrome="True"
 	ResizeBorderThickness="0"
 	sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
-	BorderThickness="0"
+	Template="{StaticResource ChromelessWindowTemp}"
 >
-	<Window.Resources>
-		<Thickness x:Key="ButtonBorderThickness">0</Thickness>
-		<Thickness x:Key="ButtonPadding">5</Thickness>
-		<Thickness x:Key="ButtonMargin">0,0,5,0</Thickness>
-		<Brush x:Key="MetroThemeBrush">DodgerBlue</Brush>
-		<Brush x:Key="ToolButtonBrush">Black</Brush>
-		<system:Double x:Key="MenuItemFontSize">14</system:Double>
-	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						Visibility="Visible"
