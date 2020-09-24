@@ -1,9 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using DynamicData;
+using Microsoft.Extensions.Logging;
+using PingClientBase;
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Reactive;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using TCPingInfoView.Interfaces;
 using TCPingInfoView.Models;
@@ -25,6 +30,7 @@ namespace TCPingInfoView.ViewModels
 
 		#endregion
 
+		private SourceList<Server> ServerSourceList { get; } = new SourceList<Server>();
 		public readonly ReadOnlyObservableCollection<Server> ServerList;
 
 		public MainWindowViewModel(MainWindow window,
@@ -39,6 +45,13 @@ namespace TCPingInfoView.ViewModels
 			_localize = localize;
 			ConfigService = configService;
 
+			ServerSourceList
+					.Connect()
+					.ObserveOnDispatcher()
+					.Bind(out ServerList)
+					.DisposeMany()
+					.Subscribe();
+
 			InitAsync().NoWarning();
 
 			ShowWindowCommand = ReactiveCommand.Create(ShowWindow);
@@ -48,6 +61,27 @@ namespace TCPingInfoView.ViewModels
 		{
 			await ReloadDefaultPlugins();
 			await ConfigService.LoadAsync(default);
+#if DEBUG
+			var server = new Server
+			{
+				Hostname = @"localhost",
+				Port = 3389,
+				Protocol = @"TCP",
+				Remark = @"本机 RDP",
+				Ip = IPAddress.IPv6Loopback,
+				CurrentResult = new PingResult { Latency = 114514, Status = IPStatus.Success, Info = @"Test Info" }
+			};
+			while (ConfigService.Config.Servers.Count < 100)
+			{
+				ConfigService.Config.Servers.Add(server);
+				ConfigService.Config.Servers.Add(server);
+				ConfigService.Config.Servers.Add(server);
+				ConfigService.Config.Servers.Add(server);
+				ConfigService.Config.Servers.Add(server);
+			}
+			ConfigService.Config.Servers[0] = server;
+#endif
+			ReloadServersList();
 		}
 
 		private async Task ReloadDefaultPlugins()
@@ -72,6 +106,12 @@ namespace TCPingInfoView.ViewModels
 		public void ChangeLanguage(CultureInfo culture)
 		{
 			_localize.Current = culture;
+		}
+
+		private void ReloadServersList()
+		{
+			ServerSourceList.Clear();
+			ServerSourceList.AddRange(ConfigService.Config.Servers);
 		}
 	}
 }

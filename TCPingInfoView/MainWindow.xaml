@@ -24,14 +24,30 @@
 	BorderBrush="{StaticResource MetroThemeBrush}"
 	TitleBarBackground="{StaticResource MetroThemeBrush}"
 	TitleBarForeground="White"
-	TitleTextAlignment="Center"
+	TitleTextAlignment="Left"
 	TitleFontSize="16"
 	TitleBarHeight="35"
 	UseNativeChrome="True"
 	ResizeBorderThickness="0"
-	sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
 	Template="{StaticResource ChromelessWindowTemp}"
+	sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
 >
+	<Window.Resources>
+		<SolidColorBrush x:Key="BorderBrush" Color="#E5E5E5" />
+
+		<Style TargetType="syncfusion:VirtualizingCellsControl" x:Key="AlternatingRowStyle">
+			<Setter Property="Background" Value="#f9f9f9" />
+		</Style>
+
+		<Style TargetType="syncfusion:GridHeaderCellControl">
+			<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+		</Style>
+
+		<Style TargetType="syncfusion:GridCell">
+			<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+		</Style>
+
+	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						Visibility="Visible"
@@ -49,12 +65,14 @@
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
 		<DockPanel>
-			<Menu DockPanel.Dock="Top"
-								Background="Transparent"
-								FontSize="{StaticResource MenuItemFontSize}"
-								FontFamily="{lex:Loc Key=MetroFontFamily}"
-								BorderThickness="0"
-								Margin="3">
+			<Menu 
+				DockPanel.Dock="Top"
+				Background="{x:Null}"
+				sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
+				FontSize="{StaticResource MenuItemFontSize}"
+				FontFamily="{lex:Loc Key=MetroFontFamily}"
+				BorderThickness="0"
+				Margin="3">
 				<MenuItem x:Name="FileMenuItem" Header="{lex:Loc}" >
 					<MenuItem x:Name="LoadMenuItem" Header="{lex:Loc}" />
 					<MenuItem x:Name="SaveMenuItem" Header="{lex:Loc}" />
@@ -63,7 +81,7 @@
 				</MenuItem>
 			</Menu>
 			<WrapPanel DockPanel.Dock="Top" Margin="5,5,0,5" sfSkinManager:SfSkinManager.VisualStyle="MaterialLight">
-				<Button Background="Transparent"
+				<Button Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
@@ -73,7 +91,7 @@
 						</Canvas>
 					</Viewbox>
 				</Button>
-				<Button Background="Transparent"
+				<Button Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
@@ -83,7 +101,7 @@
 						</Canvas>
 					</Viewbox>
 				</Button>
-				<Button Background="Transparent"
+				<Button Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
@@ -95,11 +113,55 @@
 				</Button>
 			</WrapPanel>
 			<syncfusion:SfDataGrid
+				x:Name="ServerListDataGrid"
+				FontFamily="{lex:Loc Key=MetroFontFamily}"
 				Margin="5"
-				BorderThickness="0"
-				Background="Transparent"
-			>
+				BorderThickness="1"
+				Background="{x:Null}"
+				BorderBrush="{StaticResource BorderBrush}"
+				
+				ColumnSizer="Star"
+				AutoGenerateColumns="False"
+				RowSelectionBrush="#cde8ff"
+				RowHoverHighlightingBrush="#e5f3ff"
+				CurrentCellBorderBrush="{x:Null}"
+				CurrentCellBorderThickness="2"
+				AlternatingRowStyle="{StaticResource AlternatingRowStyle}"
+				AlternationCount="3"
+				
+				AllowResizingHiddenColumns="True"
+				SelectionUnit="Row" SelectionMode="Single"
+				AllowEditing="False" AddNewRowPosition="None"
+				AllowResizingColumns="True"
+				AllowDeleting="False"
+				AllowDraggingRows="False" AllowDraggingColumns="True" AllowDrop="False"
+				AllowGrouping="False" ShowGroupDropArea="False"
+				AllowSorting="True" AllowFiltering="False" ShowSortNumbers="True"
+				ShowToolTip="True"
+				ShowRowHeader="False"
 
+				EnableDataVirtualization="True"
+				ScrollMode="None" CanMaintainScrollPosition="True" ShowBusyIndicator="True"
+			>
+				<syncfusion:SfDataGrid.Columns>
+					<syncfusion:GridTextColumn MappingName="Hostname" HeaderText="{lex:Loc Key=HostnameColumn_HeaderText}" />
+
+					<syncfusion:GridTextColumn MappingName="Ip" HeaderText="{lex:Loc Key=IpColumn_HeaderText}" />
+
+					<syncfusion:GridNumericColumn
+						MappingName="Port" HeaderText="{lex:Loc Key=PortColumn_HeaderText}" 
+						NumberDecimalDigits="0" TextAlignment="Left" />
+
+					<syncfusion:GridTextColumn MappingName="Protocol" HeaderText="{lex:Loc Key=ProtocolColumn_HeaderText}" />
+
+					<syncfusion:GridNumericColumn
+						MappingName="CurrentResult.Latency" HeaderText="{lex:Loc Key=LatencyColumn_HeaderText}" 
+						NumberDecimalDigits="0" TextAlignment="Left" 
+						AllowNullValue="True" NullText="Fail"/>
+
+					<syncfusion:GridTextColumn MappingName="Remark" HeaderText="{lex:Loc Key=RemarkColumn_HeaderText}" />
+
+				</syncfusion:SfDataGrid.Columns>
 			</syncfusion:SfDataGrid>
 		</DockPanel>
 	</Grid>

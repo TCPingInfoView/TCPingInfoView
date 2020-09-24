@@ -18,8 +18,9 @@ namespace TCPingInfoView
 
 			this.WhenActivated(d =>
 			{
-				logger.LogDebug(@"MainWindow Activated");
 				this.BindCommand(ViewModel, vm => vm.ShowWindowCommand, v => v.NotifyIcon, nameof(NotifyIcon.TrayLeftMouseUp)).DisposeWith(d);
+
+				this.OneWayBind(ViewModel, vm => vm.ServerList, v => v.ServerListDataGrid.ItemsSource).DisposeWith(d);
 			});
 		}
 	}

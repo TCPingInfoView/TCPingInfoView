@@ -79,6 +79,33 @@ namespace TCPingInfoView.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Host name 的本地化字符串。
+        /// </summary>
+        public static string HostnameColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("HostnameColumn_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 IP Address 的本地化字符串。
+        /// </summary>
+        public static string IpColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("IpColumn_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Latency(ms) 的本地化字符串。
+        /// </summary>
+        public static string LatencyColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("LatencyColumn_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 _Load 的本地化字符串。
         /// </summary>
         public static string LoadMenuItem_Header {
@@ -93,6 +120,33 @@ namespace TCPingInfoView.I18n {
         public static string MetroFontFamily {
             get {
                 return ResourceManager.GetString("MetroFontFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Port 的本地化字符串。
+        /// </summary>
+        public static string PortColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("PortColumn_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Protocol 的本地化字符串。
+        /// </summary>
+        public static string ProtocolColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("ProtocolColumn_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Remark 的本地化字符串。
+        /// </summary>
+        public static string RemarkColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("RemarkColumn_HeaderText", resourceCulture);
             }
         }
         

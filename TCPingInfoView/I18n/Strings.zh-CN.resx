@@ -135,4 +135,22 @@
   <data name="SaveMenuItem_Header" xml:space="preserve">
 	  <value>保存(_S)</value>
   </data>
+  <data name="HostnameColumn_HeaderText" xml:space="preserve">
+	  <value>主机名</value>
+  </data>
+  <data name="PortColumn_HeaderText" xml:space="preserve">
+	  <value>端口</value>
+  </data>
+  <data name="ProtocolColumn_HeaderText" xml:space="preserve">
+	  <value>协议</value>
+  </data>
+  <data name="RemarkColumn_HeaderText" xml:space="preserve">
+	  <value>备注</value>
+  </data>
+  <data name="IpColumn_HeaderText" xml:space="preserve">
+	  <value>IP 地址</value>
+  </data>
+  <data name="LatencyColumn_HeaderText" xml:space="preserve">
+	  <value>延迟(ms)</value>
+  </data>
 </root>

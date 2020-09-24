@@ -104,7 +104,7 @@ namespace TCPingInfoView
 					outputTemplate: outputTemplate,
 					rollOnFileSizeLimit: true,
 					retainedFileCountLimit: 2,
-					fileSizeLimitBytes: 10 * 1024 * 1024))
+					fileSizeLimitBytes: Constants.MaxLogFileSize))
 				.CreateLogger();
 
 			services.AddSingleton<MainWindow>();

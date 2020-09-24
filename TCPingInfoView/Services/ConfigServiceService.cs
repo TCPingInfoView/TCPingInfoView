@@ -20,7 +20,7 @@ namespace TCPingInfoView.Services
 		public Config Config
 		{
 			get => _config;
-			set => this.RaiseAndSetIfChanged(ref _config, value);
+			private set => this.RaiseAndSetIfChanged(ref _config, value);
 		}
 
 		private readonly ILogger _logger;

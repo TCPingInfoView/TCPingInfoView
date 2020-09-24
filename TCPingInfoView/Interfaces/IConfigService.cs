@@ -9,7 +9,7 @@ namespace TCPingInfoView.Interfaces
 		/// <summary>
 		/// 配置文件
 		/// </summary>
-		Config Config { get; set; }
+		Config Config { get; }
 
 		/// <summary>
 		/// 配置文件路径

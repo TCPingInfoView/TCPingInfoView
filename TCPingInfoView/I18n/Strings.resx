@@ -135,4 +135,22 @@
   <data name="SaveMenuItem_Header" xml:space="preserve">
 	  <value>_Save</value>
   </data>
+  <data name="HostnameColumn_HeaderText" xml:space="preserve">
+	  <value>Host name</value>
+  </data>
+  <data name="PortColumn_HeaderText" xml:space="preserve">
+	  <value>Port</value>
+  </data>
+  <data name="ProtocolColumn_HeaderText" xml:space="preserve">
+	  <value>Protocol</value>
+  </data>
+  <data name="RemarkColumn_HeaderText" xml:space="preserve">
+	  <value>Remark</value>
+  </data>
+  <data name="IpColumn_HeaderText" xml:space="preserve">
+	  <value>IP Address</value>
+  </data>
+  <data name="LatencyColumn_HeaderText" xml:space="preserve">
+	  <value>Latency(ms)</value>
+  </data>
 </root>
