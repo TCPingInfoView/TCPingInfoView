@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.Threading;
 using ReactiveUI;
 using System;
 using System.IO;
@@ -27,7 +28,7 @@ namespace TCPingInfoView.Services
 
 		private IDisposable _configMonitor;
 
-		private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
+		private readonly AsyncReaderWriterLock _lock = new AsyncReaderWriterLock();
 
 		private static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions
 		{
@@ -44,19 +45,16 @@ namespace TCPingInfoView.Services
 			_configMonitor = this.WhenAnyValue(x => x.Config)
 				.Throttle(TimeSpan.FromSeconds(1))
 				.DistinctUntilChanged()
-				.Where(_ => !_lock.IsWriteLockHeld)
+				.Where(_ => Config != null && !_lock.IsWriteLockHeld)
 				.Subscribe(async _ => { await SaveAsync(default); });
 		}
 
 		public async Task SaveAsync(CancellationToken token)
 		{
-			if (Config == null)
-			{
-				return;
-			}
 			try
 			{
-				_lock.EnterWriteLock();
+				await using var _ = await _lock.WriteLockAsync(token);
+
 				await using var stream = new MemoryStream();
 
 				await JsonSerializer.SerializeAsync(stream, Config, JsonOptions, token);
@@ -70,17 +68,13 @@ namespace TCPingInfoView.Services
 			{
 				_logger.LogError(ex, @"Save Config Error!");
 			}
-			finally
-			{
-				_lock.ExitWriteLock();
-			}
 		}
 
 		public async Task LoadAsync(CancellationToken token)
 		{
 			try
 			{
-				_lock.EnterReadLock();
+				await using var _ = await _lock.ReadLockAsync(token);
 
 				await using var fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete, 4096, true);
 
@@ -95,10 +89,6 @@ namespace TCPingInfoView.Services
 			{
 				_logger.LogError(ex, @"Load Config Error!");
 				Init();
-			}
-			finally
-			{
-				_lock.ExitReadLock();
 			}
 		}
 
