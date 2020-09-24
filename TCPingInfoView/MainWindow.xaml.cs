@@ -8,10 +8,13 @@ namespace TCPingInfoView
 {
 	public partial class MainWindow
 	{
-		public MainWindow(ILogger<MainWindow> logger, IPluginLoader pluginLoader, ILocalize localize)
+		public MainWindow(ILogger<MainWindow> logger,
+			IPluginLoader pluginLoader,
+			ILocalize localize,
+			IConfigService configService)
 		{
 			InitializeComponent();
-			ViewModel = new MainWindowViewModel(this, logger, pluginLoader, localize);
+			ViewModel = new MainWindowViewModel(this, logger, pluginLoader, localize, configService);
 
 			this.WhenActivated(d =>
 			{

@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using ReactiveUI;
 using System;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Reactive;
 using System.Threading.Tasks;
 using TCPingInfoView.Interfaces;
+using TCPingInfoView.Models;
 using TCPingInfoView.Utils;
 
 namespace TCPingInfoView.ViewModels
@@ -15,6 +17,7 @@ namespace TCPingInfoView.ViewModels
 		private readonly ILogger _logger;
 		private readonly IPluginLoader _pluginLoader;
 		private readonly ILocalize _localize;
+		public readonly IConfigService ConfigService;
 
 		#region Command
 
@@ -22,16 +25,29 @@ namespace TCPingInfoView.ViewModels
 
 		#endregion
 
-		public MainWindowViewModel(MainWindow window, ILogger logger, IPluginLoader pluginLoader, ILocalize localize)
+		public readonly ReadOnlyObservableCollection<Server> ServerList;
+
+		public MainWindowViewModel(MainWindow window,
+			ILogger logger,
+			IPluginLoader pluginLoader,
+			ILocalize localize,
+			IConfigService configService)
 		{
 			_window = window;
 			_logger = logger;
 			_pluginLoader = pluginLoader;
 			_localize = localize;
+			ConfigService = configService;
 
-			ReloadDefaultPlugins().NoWarning();
+			InitAsync().NoWarning();
 
 			ShowWindowCommand = ReactiveCommand.Create(ShowWindow);
+		}
+
+		private async Task InitAsync()
+		{
+			await ReloadDefaultPlugins();
+			await ConfigService.LoadAsync(default);
 		}
 
 		private async Task ReloadDefaultPlugins()
