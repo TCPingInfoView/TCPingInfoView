@@ -11,6 +11,8 @@
 	xmlns:sfSkinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
 	xmlns:viewModels="clr-namespace:TCPingInfoView.ViewModels"
 	xmlns:views="clr-namespace:TCPingInfoView.Views"
+	xmlns:data="clr-namespace:Syncfusion.Data;assembly=Syncfusion.Data.WPF"
+	xmlns:utils="clr-namespace:TCPingInfoView.Utils"
 	lex:LocalizeDictionary.DesignCulture="zh-CN"
 	lex:ResxLocalizationProvider.DefaultAssembly="TCPingInfoView"
 	lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -42,6 +44,7 @@
 				<TextBlock Text="{Binding Path=Data.CurrentResult.Info}"/>
 			</Grid>
 		</DataTemplate>
+		<utils:CustomComparer x:Key="Comparer" />
 	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
@@ -138,6 +141,9 @@
 				EnableDataVirtualization="True"
 				ScrollMode="None" CanMaintainScrollPosition="True" ShowBusyIndicator="True"
 			>
+				<syncfusion:SfDataGrid.SortComparers>
+					<data:SortComparer Comparer="{StaticResource Comparer}" PropertyName="Ip" />
+				</syncfusion:SfDataGrid.SortComparers>
 				<syncfusion:SfDataGrid.DetailsViewDefinition>
 					<syncfusion:TemplateViewDefinition RowTemplate="{StaticResource DetailsViewTemplate}" />
 				</syncfusion:SfDataGrid.DetailsViewDefinition>
