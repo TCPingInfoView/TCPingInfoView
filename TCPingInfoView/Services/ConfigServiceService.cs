@@ -4,6 +4,7 @@ using ReactiveUI;
 using System;
 using System.IO;
 using System.Reactive.Linq;
+using System.Reactive.Threading.Tasks;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -46,7 +47,7 @@ namespace TCPingInfoView.Services
 				.Throttle(TimeSpan.FromSeconds(1))
 				.DistinctUntilChanged()
 				.Where(_ => Config != null && !_lock.IsWriteLockHeld)
-				.Subscribe(async _ => { await SaveAsync(default); });
+				.Subscribe(_ => SaveAsync(default).ToObservable());
 		}
 
 		public async Task SaveAsync(CancellationToken token)
