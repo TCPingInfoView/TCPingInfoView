@@ -30,7 +30,8 @@
 	UseNativeChrome="True"
 	ResizeBorderThickness="0"
 	Template="{StaticResource ChromelessWindowTemp}"
-	sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
+	sfSkinManager:SfSkinManager.VisualStyle="VisualStudio2015"
+	Background="White"
 >
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
@@ -41,7 +42,7 @@
 						>
 			<tb:TaskbarIcon.ContextMenu>
 				<ContextMenu
-					sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
+					sfSkinManager:SfSkinManager.VisualStyle="VisualStudio2015"
 					FontSize="{StaticResource MenuItemFontSize}">
 					<MenuItem x:Name="ShowMenuItem" Header="{lex:Loc}" />
 					<MenuItem x:Name="ExitMenuItem" Header="{lex:Loc}" />
@@ -49,10 +50,9 @@
 			</tb:TaskbarIcon.ContextMenu>
 		</tb:TaskbarIcon>
 		<DockPanel>
-			<Menu 
+			<Menu
 				DockPanel.Dock="Top"
 				Background="{x:Null}"
-				sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
 				FontSize="{StaticResource MenuItemFontSize}"
 				FontFamily="{lex:Loc Key=MetroFontFamily}"
 				BorderThickness="0"
@@ -102,18 +102,13 @@
 				Margin="5"
 				BorderThickness="1"
 				Background="{x:Null}"
-				BorderBrush="{StaticResource MyBorderBrush}"
 
 				ColumnSizer="Star"
 				AutoGenerateColumns="False"
-				RowSelectionBrush="{StaticResource SelectionBrush}"
-				RowHoverHighlightingBrush="{StaticResource HoverBrush}"
 				CurrentCellBorderBrush="{x:Null}"
 				CurrentCellBorderThickness="2"
 				AlternatingRowStyle="{StaticResource AlternatingRowStyle}"
 				AlternationCount="3"
-				HeaderStyle="{StaticResource SfDataGridHeaderStyle1}"
-				CellStyle="{StaticResource GridCellStyle1}"
 
 				AllowResizingHiddenColumns="True"
 				SelectionUnit="Row" SelectionMode="Single"

@@ -27,7 +27,7 @@
 		<PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
 		<PackageReference Include="Syncfusion.SfGrid.WPF" Version="18.2.0.59" />
 		<PackageReference Include="Syncfusion.Themes.MaterialLight.WPF" Version="18.2.0.59" />
-		<PackageReference Include="Syncfusion.Themes.Office2013White.WPF" Version="18.2.0.59" />
+		<PackageReference Include="Syncfusion.Themes.VisualStudio2015.WPF" Version="18.2.0.59" />
 		<PackageReference Include="WPFLocalizeExtension" Version="3.8.0" />
 	</ItemGroup>
 
