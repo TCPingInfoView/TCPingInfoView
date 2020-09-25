@@ -5,6 +5,7 @@ using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Reactive;
@@ -65,7 +66,11 @@ namespace TCPingInfoView.ViewModels
 			ShowWindowCommand = ReactiveCommand.Create(ShowWindow);
 			HideWindowCommand = ReactiveCommand.Create(HideWindow);
 			ExitCommand = ReactiveCommand.Create(Exit);
-			TestCommand = ReactiveCommand.CreateFromTask(TestAsync);
+			TestCommand = ReactiveCommand.CreateFromObservable(Test);
+			TestCommand.ThrownExceptions.Subscribe(ex =>
+			{
+				_logger.LogError(ex, @"Test Error");
+			});
 		}
 
 		private async Task InitAsync()
@@ -164,62 +169,58 @@ namespace TCPingInfoView.ViewModels
 			}
 		}
 
-		private async Task TestAsync(CancellationToken token)
+		private async Task TestServerAsync(Server server, CancellationToken token)
 		{
 			try
 			{
-				var servers = ServerSourceList;
-				foreach (var server in servers.Items)
+				if (_pluginLoader.Plugins.TryGetValue(server.Protocol, out var func))
 				{
-					try
+					var client = func();
+					client.Timeout = TimeSpan.FromSeconds(3);
+					server.Ip = await _dnsQuery.QueryAsync(server.Hostname);
+					if (server.Ip != null)
 					{
-						if (_pluginLoader.Plugins.TryGetValue(server.Protocol, out var func))
-						{
-							var client = func();
-							client.Timeout = TimeSpan.FromSeconds(3);
-							server.Ip = await _dnsQuery.QueryAsync(server.Hostname);
-							if (server.Ip != null)
-							{
-								client.EndPoint = new IPEndPoint(server.Ip, server.Port);
-								server.CurrentResult = await client.Ping(token);
-							}
-							else
-							{
-								// IP 解析错误
-								server.CurrentResult = new PingResult
-								{
-									Latency = -1.0,
-									Status = IPStatus.BadDestination,
-									Info = @"Failed to resolve IP address!" //TODO: I18N
-								};
-							}
-						}
-						else
-						{
-							// 不支持的协议类型
-							server.CurrentResult = new PingResult
-							{
-								Latency = -1.0,
-								Status = IPStatus.DestinationProtocolUnreachable,
-								Info = @"Protocol not supported!" //TODO: I18N
-							};
-						}
+						client.EndPoint = new IPEndPoint(server.Ip, server.Port);
+						server.CurrentResult = await client.Ping(token);
 					}
-					catch (Exception ex)
+					else
 					{
+						// IP 解析错误
 						server.CurrentResult = new PingResult
 						{
 							Latency = -1.0,
-							Status = IPStatus.Unknown,
-							Info = $@"{ex}"
+							Status = IPStatus.BadDestination,
+							Info = @"Failed to resolve IP address!" //TODO: I18N
 						};
 					}
+				}
+				else
+				{
+					// 不支持的协议类型
+					server.CurrentResult = new PingResult
+					{
+						Latency = -1.0,
+						Status = IPStatus.DestinationProtocolUnreachable,
+						Info = @"Protocol not supported!" //TODO: I18N
+					};
 				}
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError(ex, @"Test Error");
+				server.CurrentResult = new PingResult
+				{
+					Latency = -1.0,
+					Status = IPStatus.Unknown,
+					Info = $@"{ex}"
+				};
 			}
+		}
+
+		private IObservable<Unit> Test()
+		{
+			return ServerSourceList.Items
+					.Select(server => Observable.FromAsync(ct => TestServerAsync(server, ct)))
+					.Merge();
 		}
 	}
 }
