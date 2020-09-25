@@ -86,6 +86,13 @@ namespace TCPingInfoView.ViewModels
 				Hostname = @"localhost",
 				Port = 0,
 				Protocol = @"TCP",
+				Remark = @"端口错误",
+			});
+			ConfigService.Config.Servers.Add(new Server
+			{
+				Hostname = @"localhost",
+				Port = 114,
+				Protocol = @"TCP",
 				Remark = @"测试失败",
 			});
 			ConfigService.Config.Servers.Add(new Server
@@ -182,7 +189,7 @@ namespace TCPingInfoView.ViewModels
 								server.CurrentResult = new PingResult
 								{
 									Latency = -1.0,
-									Status = IPStatus.DestinationHostUnreachable,
+									Status = IPStatus.BadDestination,
 									Info = @"Failed to resolve IP address!" //TODO: I18N
 								};
 							}

@@ -14,7 +14,7 @@ namespace TCPingInfoView.Views.Converters
 		{
 			if (value is PingResult result && targetType == typeof(Brush))
 			{
-				if (result.Status == IPStatus.DestinationHostUnreachable)
+				if (result.Status == IPStatus.BadDestination)
 				{
 					return new SolidColorBrush(Colors.Red);
 				}
