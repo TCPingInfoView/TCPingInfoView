@@ -16,7 +16,7 @@
 	lex:ResxLocalizationProvider.DefaultDictionary="Strings"
 	mc:Ignorable="d"
 	Title="TCPingInfoView"
-	Height="700" Width="1200"
+	Height="720" Width="1165"
 	WindowStartupLocation="CenterScreen"
 	AllowsTransparency="True"
 	SnapsToDevicePixels="True"
@@ -33,6 +33,13 @@
 	sfSkinManager:SfSkinManager.VisualStyle="VisualStudio2015"
 	Background="White"
 >
+	<Window.Resources>
+		<DataTemplate x:Key="DetailsViewTemplate">
+			<Grid>
+				<TextBlock Text="{Binding Path=Data.CurrentResult.Info}"/>
+			</Grid>
+		</DataTemplate>
+	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						Visibility="Visible"
@@ -103,7 +110,7 @@
 				BorderThickness="1"
 				Background="{x:Null}"
 
-				ColumnSizer="Star"
+				ColumnSizer="AutoWithLastColumnFill"
 				AutoGenerateColumns="False"
 				CurrentCellBorderBrush="{x:Null}"
 				CurrentCellBorderThickness="2"
@@ -124,7 +131,14 @@
 				EnableDataVirtualization="True"
 				ScrollMode="None" CanMaintainScrollPosition="True" ShowBusyIndicator="True"
 			>
+				<syncfusion:SfDataGrid.DetailsViewDefinition>
+					<syncfusion:TemplateViewDefinition RowTemplate="{StaticResource DetailsViewTemplate}" />
+				</syncfusion:SfDataGrid.DetailsViewDefinition>
 				<syncfusion:SfDataGrid.Columns>
+
+					<syncfusion:GridNumericColumn
+						MappingName="Index" HeaderText="{lex:Loc Key=IndexColumn_HeaderText}"
+						NumberDecimalDigits="0" TextAlignment="Left" />
 
 					<syncfusion:GridTextColumn MappingName="Hostname" HeaderText="{lex:Loc Key=HostnameColumn_HeaderText}" />
 

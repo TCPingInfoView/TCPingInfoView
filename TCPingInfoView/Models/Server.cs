@@ -18,6 +18,7 @@ namespace TCPingInfoView.Models
 		private string _remark;
 		private IPAddress _ip;
 		private PingResult _currentResult;
+		private int _index;
 
 		#endregion
 
@@ -77,6 +78,16 @@ namespace TCPingInfoView.Models
 		{
 			get => _currentResult;
 			set => _currentResult = value;
+		}
+
+		/// <summary>
+		/// 在列表的位置
+		/// </summary>
+		[JsonIgnore]
+		public int Index
+		{
+			get => _index;
+			set => this.RaiseAndSetIfChanged(ref _index, value);
 		}
 
 		#endregion

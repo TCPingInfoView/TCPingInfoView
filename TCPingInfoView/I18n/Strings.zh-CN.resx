@@ -153,4 +153,7 @@
   <data name="LatencyColumn_HeaderText" xml:space="preserve">
 	  <value>延迟(ms)</value>
   </data>
+  <data name="IndexColumn_HeaderText" xml:space="preserve">
+	  <value>序号</value>
+  </data>
 </root>

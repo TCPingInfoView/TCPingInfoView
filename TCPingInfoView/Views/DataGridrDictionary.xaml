@@ -3,6 +3,6 @@
 	xmlns:syncfusion="http://schemas.syncfusion.com/wpf">
 
 	<Style TargetType="syncfusion:VirtualizingCellsControl" x:Key="AlternatingRowStyle">
-		<Setter Property="Background" Value="#F9F9F9" />
+		<Setter Property="Background" Value="#F7F7F7" />
 	</Style>
 </ResourceDictionary>

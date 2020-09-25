@@ -153,4 +153,7 @@
   <data name="LatencyColumn_HeaderText" xml:space="preserve">
 	  <value>Latency(ms)</value>
   </data>
+  <data name="IndexColumn_HeaderText" xml:space="preserve">
+	  <value>Index</value>
+  </data>
 </root>

@@ -110,8 +110,18 @@ namespace TCPingInfoView.ViewModels
 
 		private void ReloadServersList()
 		{
+			ResetListIndex();
 			ServerSourceList.Clear();
 			ServerSourceList.AddRange(ConfigService.Config.Servers);
+		}
+
+		private void ResetListIndex()
+		{
+			var servers = ConfigService.Config.Servers;
+			for (var i = 0; i < servers.Count; ++i)
+			{
+				servers[i].Index = i + 1;
+			}
 		}
 	}
 }

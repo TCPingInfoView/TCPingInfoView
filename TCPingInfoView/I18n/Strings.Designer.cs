@@ -88,6 +88,15 @@ namespace TCPingInfoView.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Index 的本地化字符串。
+        /// </summary>
+        public static string IndexColumn_HeaderText {
+            get {
+                return ResourceManager.GetString("IndexColumn_HeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 IP Address 的本地化字符串。
         /// </summary>
         public static string IpColumn_HeaderText {
