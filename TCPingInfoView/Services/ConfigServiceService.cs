@@ -7,7 +7,6 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using TCPingInfoView.Interfaces;
@@ -15,7 +14,6 @@ using TCPingInfoView.Models;
 
 namespace TCPingInfoView.Services
 {
-	[Serializable]
 	public class ConfigServiceService : ReactiveObject, IConfigService, IDisposable
 	{
 		private Config _config;
@@ -27,7 +25,7 @@ namespace TCPingInfoView.Services
 
 		private readonly ILogger _logger;
 
-		private IDisposable _configMonitor;
+		private readonly IDisposable _configMonitor;
 
 		private readonly AsyncReaderWriterLock _lock = new AsyncReaderWriterLock();
 
@@ -37,7 +35,6 @@ namespace TCPingInfoView.Services
 			Encoder = JavaScriptEncoder.Default,
 		};
 
-		[JsonIgnore]
 		public string FilePath { get; set; } = $@"{nameof(TCPingInfoView)}.config.json";
 
 		public ConfigServiceService(ILogger<ConfigServiceService> logger)
@@ -80,16 +77,17 @@ namespace TCPingInfoView.Services
 				await using var fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete, 4096, true);
 
 				Config = await JsonSerializer.DeserializeAsync<Config>(fs, cancellationToken: token);
-
-				if (Config == null)
-				{
-					Init();
-				}
 			}
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, @"Load Config Error!");
-				Init();
+			}
+			finally
+			{
+				if (Config == null)
+				{
+					Init();
+				}
 			}
 		}
 

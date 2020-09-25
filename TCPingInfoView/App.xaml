@@ -8,6 +8,7 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Views/ChromelessWindowDictionary.xaml" />
+				<ResourceDictionary Source="Views/GridHeaderDictionary.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<Thickness x:Key="ButtonBorderThickness">0</Thickness>
 			<Thickness x:Key="ButtonPadding">5</Thickness>

@@ -32,22 +32,6 @@
 	Template="{StaticResource ChromelessWindowTemp}"
 	sfSkinManager:SfSkinManager.VisualStyle="Office2013White"
 >
-	<Window.Resources>
-		<SolidColorBrush x:Key="BorderBrush" Color="#E5E5E5" />
-
-		<Style TargetType="syncfusion:VirtualizingCellsControl" x:Key="AlternatingRowStyle">
-			<Setter Property="Background" Value="#f9f9f9" />
-		</Style>
-
-		<Style TargetType="syncfusion:GridHeaderCellControl">
-			<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
-		</Style>
-
-		<Style TargetType="syncfusion:GridCell">
-			<Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
-		</Style>
-
-	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
 						Visibility="Visible"
@@ -118,17 +102,19 @@
 				Margin="5"
 				BorderThickness="1"
 				Background="{x:Null}"
-				BorderBrush="{StaticResource BorderBrush}"
-				
+				BorderBrush="{StaticResource MyBorderBrush}"
+
 				ColumnSizer="Star"
 				AutoGenerateColumns="False"
-				RowSelectionBrush="#cde8ff"
-				RowHoverHighlightingBrush="#e5f3ff"
+				RowSelectionBrush="{StaticResource SelectionBrush}"
+				RowHoverHighlightingBrush="{StaticResource HoverBrush}"
 				CurrentCellBorderBrush="{x:Null}"
 				CurrentCellBorderThickness="2"
 				AlternatingRowStyle="{StaticResource AlternatingRowStyle}"
 				AlternationCount="3"
-				
+				HeaderStyle="{StaticResource SfDataGridHeaderStyle1}"
+				CellStyle="{StaticResource GridCellStyle1}"
+
 				AllowResizingHiddenColumns="True"
 				SelectionUnit="Row" SelectionMode="Single"
 				AllowEditing="False" AddNewRowPosition="None"
@@ -144,6 +130,7 @@
 				ScrollMode="None" CanMaintainScrollPosition="True" ShowBusyIndicator="True"
 			>
 				<syncfusion:SfDataGrid.Columns>
+
 					<syncfusion:GridTextColumn MappingName="Hostname" HeaderText="{lex:Loc Key=HostnameColumn_HeaderText}" />
 
 					<syncfusion:GridTextColumn MappingName="Ip" HeaderText="{lex:Loc Key=IpColumn_HeaderText}" />
