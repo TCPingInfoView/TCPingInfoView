@@ -66,7 +66,7 @@ namespace TCPingInfoView.Services
 			return default;
 		}
 
-		public ValueTask Clear()
+		public ValueTask ClearAsync()
 		{
 			Plugins.Clear();
 			return default;

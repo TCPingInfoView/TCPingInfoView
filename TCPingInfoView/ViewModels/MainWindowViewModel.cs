@@ -59,7 +59,7 @@ namespace TCPingInfoView.ViewModels
 
 		private async Task InitAsync()
 		{
-			await ReloadDefaultPlugins();
+			await ReloadDefaultPluginsAsync();
 			await ConfigService.LoadAsync(default);
 #if DEBUG
 			var server = new Server
@@ -84,12 +84,12 @@ namespace TCPingInfoView.ViewModels
 			ReloadServersList();
 		}
 
-		private async Task ReloadDefaultPlugins()
+		private async Task ReloadDefaultPluginsAsync()
 		{
 			_logger.LogInformation(@"Loading plugins");
 			try
 			{
-				await _pluginLoader.Clear();
+				await _pluginLoader.ClearAsync();
 				await _pluginLoader.LoadPluginsAsync(@"plugins");
 			}
 			catch (Exception ex)

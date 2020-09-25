@@ -25,6 +25,6 @@ namespace TCPingInfoView.Interfaces
 		/// <summary>
 		/// 清空已加载的插件
 		/// </summary>
-		ValueTask Clear();
+		ValueTask ClearAsync();
 	}
 }
