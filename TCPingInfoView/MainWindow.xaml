@@ -34,6 +34,9 @@
 	Background="White"
 >
 	<Window.Resources>
+		<Style TargetType="syncfusion:VirtualizingCellsControl" x:Key="AlternatingRowStyle">
+			<Setter Property="Background" Value="#F7F7F7" />
+		</Style>
 		<DataTemplate x:Key="DetailsViewTemplate">
 			<Grid>
 				<TextBlock Text="{Binding Path=Data.CurrentResult.Info}"/>
@@ -70,8 +73,9 @@
 					<Separator/>
 					<MenuItem x:Name="ExitMenuItem2" Header="{lex:Loc Key=ExitMenuItem_Header}" />
 				</MenuItem>
+				
 			</Menu>
-			<WrapPanel DockPanel.Dock="Top" Margin="5,5,0,5" sfSkinManager:SfSkinManager.VisualStyle="MaterialLight">
+			<WrapPanel DockPanel.Dock="Top" Margin="5,5,0,5">
 				<Button x:Name="TestButton"
 						Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
@@ -141,24 +145,35 @@
 
 					<syncfusion:GridNumericColumn
 						MappingName="Index" HeaderText="{lex:Loc Key=IndexColumn_HeaderText}"
-						NumberDecimalDigits="0" TextAlignment="Left" />
+						NumberDecimalDigits="0" TextAlignment="Left"
+						HorizontalHeaderContentAlignment="Left" />
 
-					<syncfusion:GridTextColumn MappingName="Hostname" HeaderText="{lex:Loc Key=HostnameColumn_HeaderText}" />
+					<syncfusion:GridTextColumn 
+						MappingName="Hostname" HeaderText="{lex:Loc Key=HostnameColumn_HeaderText}"
+						HorizontalHeaderContentAlignment="Left" />
 
-					<syncfusion:GridTextColumn MappingName="Ip" HeaderText="{lex:Loc Key=IpColumn_HeaderText}" />
+					<syncfusion:GridTextColumn 
+						MappingName="Ip" HeaderText="{lex:Loc Key=IpColumn_HeaderText}"
+						HorizontalHeaderContentAlignment="Left" />
 
 					<syncfusion:GridNumericColumn
 						MappingName="Port" HeaderText="{lex:Loc Key=PortColumn_HeaderText}" 
-						NumberDecimalDigits="0" TextAlignment="Left" />
+						NumberDecimalDigits="0" TextAlignment="Right"
+						HorizontalHeaderContentAlignment="Right" />
 
-					<syncfusion:GridTextColumn MappingName="Protocol" HeaderText="{lex:Loc Key=ProtocolColumn_HeaderText}" />
+					<syncfusion:GridTextColumn 
+						MappingName="Protocol" HeaderText="{lex:Loc Key=ProtocolColumn_HeaderText}"
+						HorizontalHeaderContentAlignment="Left" />
 
 					<syncfusion:GridNumericColumn
 						MappingName="CurrentResult.Latency" HeaderText="{lex:Loc Key=LatencyColumn_HeaderText}" 
-						NumberDecimalDigits="0" TextAlignment="Left" 
-						AllowNullValue="True" NullText="Fail"/>
+						NumberDecimalDigits="0" TextAlignment="Right" 
+						AllowNullValue="True" NullText="Fail"
+						HorizontalHeaderContentAlignment="Right" />
 
-					<syncfusion:GridTextColumn MappingName="Remark" HeaderText="{lex:Loc Key=RemarkColumn_HeaderText}" />
+					<syncfusion:GridTextColumn 
+						MappingName="Remark" HeaderText="{lex:Loc Key=RemarkColumn_HeaderText}" 
+						HorizontalHeaderContentAlignment="Left" />
 
 				</syncfusion:SfDataGrid.Columns>
 			</syncfusion:SfDataGrid>
