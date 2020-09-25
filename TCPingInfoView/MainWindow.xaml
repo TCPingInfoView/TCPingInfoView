@@ -13,6 +13,7 @@
 	xmlns:views="clr-namespace:TCPingInfoView.Views"
 	xmlns:data="clr-namespace:Syncfusion.Data;assembly=Syncfusion.Data.WPF"
 	xmlns:utils="clr-namespace:TCPingInfoView.Utils"
+	xmlns:converters="clr-namespace:TCPingInfoView.Views.Converters"
 	lex:LocalizeDictionary.DesignCulture="zh-CN"
 	lex:ResxLocalizationProvider.DefaultAssembly="TCPingInfoView"
 	lex:ResxLocalizationProvider.DefaultDictionary="Strings"
@@ -45,6 +46,10 @@
 			</Grid>
 		</DataTemplate>
 		<utils:CustomComparer x:Key="Comparer" />
+		<converters:LatencyConverter x:Key="LatencyConverter"/>
+		<converters:ProtocolConverter x:Key="ProtocolConverter"/>
+		<converters:PortConverter x:Key="PortConverter"/>
+		<converters:IpConverter x:Key="IpConverter"/>
 	</Window.Resources>
 	<Grid>
 		<tb:TaskbarIcon x:Name="NotifyIcon"
@@ -128,7 +133,7 @@
 				AlternationCount="3"
 
 				AllowResizingHiddenColumns="True"
-				SelectionUnit="Row" SelectionMode="Single"
+				SelectionUnit="Row" SelectionMode="Extended"
 				AllowEditing="False" AddNewRowPosition="None"
 				AllowResizingColumns="True"
 				AllowDeleting="False"
@@ -160,22 +165,50 @@
 
 					<syncfusion:GridTextColumn 
 						MappingName="Ip" HeaderText="{lex:Loc Key=IpColumn_HeaderText}"
-						HorizontalHeaderContentAlignment="Left" />
+						HorizontalHeaderContentAlignment="Left">
+						<syncfusion:GridTextColumn.CellStyle>
+							<Style TargetType="syncfusion:GridCell">
+								<Setter Property="Background" Value="{Binding CurrentResult,Mode=OneWay,Converter={StaticResource IpConverter}}" />
+								<Setter Property="BorderBrush" Value="#cccedb" />
+							</Style>
+						</syncfusion:GridTextColumn.CellStyle>
+					</syncfusion:GridTextColumn>
 
 					<syncfusion:GridNumericColumn
 						MappingName="Port" HeaderText="{lex:Loc Key=PortColumn_HeaderText}" 
 						NumberDecimalDigits="0" TextAlignment="Right"
-						HorizontalHeaderContentAlignment="Right" />
+						HorizontalHeaderContentAlignment="Right">
+						<syncfusion:GridNumericColumn.CellStyle>
+							<Style TargetType="syncfusion:GridCell">
+								<Setter Property="Background" Value="{Binding CurrentResult,Mode=OneWay,Converter={StaticResource PortConverter}}" />
+								<Setter Property="BorderBrush" Value="#cccedb" />
+							</Style>
+						</syncfusion:GridNumericColumn.CellStyle>
+					</syncfusion:GridNumericColumn>
 
 					<syncfusion:GridTextColumn 
 						MappingName="Protocol" HeaderText="{lex:Loc Key=ProtocolColumn_HeaderText}"
-						HorizontalHeaderContentAlignment="Left" />
+						HorizontalHeaderContentAlignment="Left">
+						<syncfusion:GridTextColumn.CellStyle>
+							<Style TargetType="syncfusion:GridCell">
+								<Setter Property="Background" Value="{Binding CurrentResult,Mode=OneWay,Converter={StaticResource ProtocolConverter}}" />
+								<Setter Property="BorderBrush" Value="#cccedb" />
+							</Style>
+						</syncfusion:GridTextColumn.CellStyle>
+					</syncfusion:GridTextColumn>
 
-					<syncfusion:GridNumericColumn
-						MappingName="CurrentResult.Latency" HeaderText="{lex:Loc Key=LatencyColumn_HeaderText}" 
-						NumberDecimalDigits="0" TextAlignment="Right" 
-						AllowNullValue="True" NullText="Fail"
-						HorizontalHeaderContentAlignment="Right" />
+					<syncfusion:GridTextColumn
+						MappingName="CurrentResult.Latency" HeaderText="{lex:Loc Key=LatencyColumn_HeaderText}"
+						DisplayBinding="{Binding CurrentResult,Mode=OneWay,Converter={StaticResource LatencyConverter}}"
+						TextAlignment="Right" SortMode="Value"
+						HorizontalHeaderContentAlignment="Right">
+						<syncfusion:GridTextColumn.CellStyle>
+							<Style TargetType="syncfusion:GridCell">
+								<Setter Property="Background" Value="{Binding CurrentResult,Mode=OneWay,Converter={StaticResource LatencyConverter}}" />
+								<Setter Property="BorderBrush" Value="#cccedb" />
+							</Style>
+						</syncfusion:GridTextColumn.CellStyle>
+					</syncfusion:GridTextColumn>
 
 					<syncfusion:GridTextColumn 
 						MappingName="Remark" HeaderText="{lex:Loc Key=RemarkColumn_HeaderText}" 

@@ -151,7 +151,7 @@
 	  <value>IP Address</value>
   </data>
   <data name="LatencyColumn_HeaderText" xml:space="preserve">
-	  <value>Latency(ms)</value>
+	  <value>Latency</value>
   </data>
   <data name="IndexColumn_HeaderText" xml:space="preserve">
 	  <value>Index</value>

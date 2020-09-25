@@ -106,7 +106,7 @@ namespace TCPingInfoView.I18n {
         }
         
         /// <summary>
-        ///   查找类似 Latency(ms) 的本地化字符串。
+        ///   查找类似 Latency 的本地化字符串。
         /// </summary>
         public static string LatencyColumn_HeaderText {
             get {
