@@ -15,10 +15,11 @@ namespace TCPingInfoView
 		public MainWindow(ILogger<MainWindow> logger,
 			IPluginLoader pluginLoader,
 			ILocalize localize,
-			IConfigService configService)
+			IConfigService configService,
+			IDnsQuery dnsQuery)
 		{
 			InitializeComponent();
-			ViewModel = new MainWindowViewModel(this, logger, pluginLoader, localize, configService);
+			ViewModel = new MainWindowViewModel(this, logger, pluginLoader, localize, configService, dnsQuery);
 
 			this.WhenActivated(d =>
 			{
@@ -30,6 +31,8 @@ namespace TCPingInfoView
 				this.BindCommand(ViewModel, vm => vm.ExitCommand, v => v.ExitMenuItem).DisposeWith(d);
 				this.BindCommand(ViewModel, vm => vm.ExitCommand, v => v.ExitMenuItem2).DisposeWith(d);
 				this.BindCommand(ViewModel, vm => vm.ExitCommand, v => v.ExitButton).DisposeWith(d);
+
+				this.BindCommand(ViewModel, vm => vm.TestCommand, v => v.TestButton).DisposeWith(d);
 
 				this.OneWayBind(ViewModel, vm => vm.ServerList, v => v.ServerListDataGrid.ItemsSource).DisposeWith(d);
 

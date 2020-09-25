@@ -112,6 +112,7 @@ namespace TCPingInfoView
 			services.AddSingleton(typeof(IPluginLoader), typeof(PingClientPluginLoader));
 			services.AddSingleton(typeof(ILocalize), typeof(Localize));
 			services.AddSingleton(typeof(IConfigService), typeof(ConfigServiceService));
+			services.AddSingleton(typeof(IDnsQuery), typeof(DefaultDnsQuery));
 			services.AddLogging(c => c.AddSerilog());
 		}
 	}

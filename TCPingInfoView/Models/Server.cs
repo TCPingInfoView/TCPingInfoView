@@ -77,7 +77,7 @@ namespace TCPingInfoView.Models
 		public PingResult CurrentResult
 		{
 			get => _currentResult;
-			set => _currentResult = value;
+			set => this.RaiseAndSetIfChanged(ref _currentResult, value);
 		}
 
 		/// <summary>
