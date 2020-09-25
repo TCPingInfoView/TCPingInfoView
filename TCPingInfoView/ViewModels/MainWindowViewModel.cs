@@ -10,6 +10,7 @@ using System.Net.NetworkInformation;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using TCPingInfoView.Interfaces;
 using TCPingInfoView.Models;
 using TCPingInfoView.Utils;
@@ -27,6 +28,8 @@ namespace TCPingInfoView.ViewModels
 		#region Command
 
 		public ReactiveCommand<Unit, Unit> ShowWindowCommand { get; }
+		public ReactiveCommand<Unit, Unit> HideWindowCommand { get; }
+		public ReactiveCommand<Unit, Unit> ExitCommand { get; }
 
 		#endregion
 
@@ -55,6 +58,8 @@ namespace TCPingInfoView.ViewModels
 			InitAsync().NoWarning();
 
 			ShowWindowCommand = ReactiveCommand.Create(ShowWindow);
+			HideWindowCommand = ReactiveCommand.Create(HideWindow);
+			ExitCommand = ReactiveCommand.Create(Exit);
 		}
 
 		private async Task InitAsync()
@@ -101,6 +106,17 @@ namespace TCPingInfoView.ViewModels
 		private void ShowWindow()
 		{
 			_window.ShowWindow();
+		}
+
+		private void HideWindow()
+		{
+			_window.Hide();
+		}
+
+		private void Exit()
+		{
+			_window.CloseReason = CloseReason.ApplicationExitCall;
+			_window.Close();
 		}
 
 		public void ChangeLanguage(CultureInfo culture)

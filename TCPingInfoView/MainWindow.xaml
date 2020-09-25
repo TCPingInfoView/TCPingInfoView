@@ -68,11 +68,12 @@
 					<MenuItem x:Name="LoadMenuItem" Header="{lex:Loc}" />
 					<MenuItem x:Name="SaveMenuItem" Header="{lex:Loc}" />
 					<Separator/>
-					<MenuItem Header="{lex:Loc Key=ExitMenuItem_Header}" />
+					<MenuItem x:Name="ExitMenuItem2" Header="{lex:Loc Key=ExitMenuItem_Header}" />
 				</MenuItem>
 			</Menu>
 			<WrapPanel DockPanel.Dock="Top" Margin="5,5,0,5" sfSkinManager:SfSkinManager.VisualStyle="MaterialLight">
-				<Button Background="{x:Null}"
+				<Button x:Name="TestButton"
+						Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
@@ -82,7 +83,8 @@
 						</Canvas>
 					</Viewbox>
 				</Button>
-				<Button Background="{x:Null}"
+				<Button x:Name="MinimizeButton" 
+						Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
@@ -92,7 +94,8 @@
 						</Canvas>
 					</Viewbox>
 				</Button>
-				<Button Background="{x:Null}"
+				<Button x:Name="ExitButton"
+						Background="{x:Null}"
 						BorderThickness="{StaticResource ButtonBorderThickness}"
 						Padding="{StaticResource ButtonPadding}"
 						Margin="{StaticResource ButtonMargin}">
