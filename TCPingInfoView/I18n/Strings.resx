@@ -156,4 +156,13 @@
   <data name="IndexColumn_HeaderText" xml:space="preserve">
 	  <value>Index</value>
   </data>
+  <data name="TestButton_ToolTip" xml:space="preserve">
+	  <value>Test</value>
+  </data>
+  <data name="ExitButton_ToolTip" xml:space="preserve">
+	  <value>Exit</value>
+  </data>
+  <data name="MinimizeButton_ToolTip" xml:space="preserve">
+	  <value>Minimize to the notification area</value>
+  </data>
 </root>

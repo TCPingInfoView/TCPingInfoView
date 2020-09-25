@@ -61,6 +61,15 @@ namespace TCPingInfoView.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Exit 的本地化字符串。
+        /// </summary>
+        public static string ExitButton_ToolTip {
+            get {
+                return ResourceManager.GetString("ExitButton_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 _Exit 的本地化字符串。
         /// </summary>
         public static string ExitMenuItem_Header {
@@ -133,6 +142,15 @@ namespace TCPingInfoView.I18n {
         }
         
         /// <summary>
+        ///   查找类似 Minimize to the notification area 的本地化字符串。
+        /// </summary>
+        public static string MinimizeButton_ToolTip {
+            get {
+                return ResourceManager.GetString("MinimizeButton_ToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Port 的本地化字符串。
         /// </summary>
         public static string PortColumn_HeaderText {
@@ -174,6 +192,15 @@ namespace TCPingInfoView.I18n {
         public static string ShowMenuItem_Header {
             get {
                 return ResourceManager.GetString("ShowMenuItem_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Test 的本地化字符串。
+        /// </summary>
+        public static string TestButton_ToolTip {
+            get {
+                return ResourceManager.GetString("TestButton_ToolTip", resourceCulture);
             }
         }
     }

@@ -156,4 +156,13 @@
   <data name="IndexColumn_HeaderText" xml:space="preserve">
 	  <value>序号</value>
   </data>
+  <data name="TestButton_ToolTip" xml:space="preserve">
+	  <value>测试</value>
+  </data>
+  <data name="ExitButton_ToolTip" xml:space="preserve">
+	  <value>退出</value>
+  </data>
+  <data name="MinimizeButton_ToolTip" xml:space="preserve">
+	  <value>最小化到通知区域</value>
+  </data>
 </root>
