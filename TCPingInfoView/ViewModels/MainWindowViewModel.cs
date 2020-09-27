@@ -181,7 +181,7 @@ namespace TCPingInfoView.ViewModels
 					if (server.Ip != null)
 					{
 						client.EndPoint = new IPEndPoint(server.Ip, server.Port);
-						server.CurrentResult = await client.Ping(token);
+						server.CurrentResult = await client.PingAsync(token);
 					}
 					else
 					{
