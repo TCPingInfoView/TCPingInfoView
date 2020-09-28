@@ -40,11 +40,15 @@ namespace TCPingInfoView.Services
 		public ConfigServiceService(ILogger<ConfigServiceService> logger)
 		{
 			_logger = logger;
-			_configMonitor = this.WhenAnyValue(x => x.Config)
+			_configMonitor = this.WhenAnyValue(x => x.Config, x => x.Config.Servers)
 				.Throttle(TimeSpan.FromSeconds(1))
 				.DistinctUntilChanged()
 				.Where(_ => Config != null && !_lock.IsWriteLockHeld)
-				.Subscribe(_ => SaveAsync(default).ToObservable());
+				.Subscribe(_ =>
+				{
+					SaveAsync(default).ToObservable();
+					_logger.LogDebug(@"Config Saved");
+				});
 		}
 
 		public async Task SaveAsync(CancellationToken token)

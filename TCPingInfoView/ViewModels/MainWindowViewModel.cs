@@ -59,7 +59,11 @@ namespace TCPingInfoView.ViewModels
 					.ObserveOnDispatcher()
 					.Bind(out ServerList)
 					.DisposeMany()
-					.Subscribe();
+					.Subscribe(_ =>
+					{
+						ResetListIndex();
+						SaveList();
+					});
 
 			InitAsync().NoWarning();
 
@@ -155,18 +159,22 @@ namespace TCPingInfoView.ViewModels
 
 		private void ReloadServersList()
 		{
-			ResetListIndex();
 			ServerSourceList.Clear();
 			ServerSourceList.AddRange(ConfigService.Config.Servers);
 		}
 
 		private void ResetListIndex()
 		{
-			var servers = ConfigService.Config.Servers;
-			for (var i = 0; i < servers.Count; ++i)
+			var i = 0;
+			foreach (var server in ServerSourceList.Items)
 			{
-				servers[i].Index = i + 1;
+				server.Index = ++i;
 			}
+		}
+
+		private void SaveList()
+		{
+			ConfigService.Config.Servers = ServerSourceList.Items.ToList();
 		}
 
 		private async Task TestServerAsync(Server server, CancellationToken token)
