@@ -43,7 +43,7 @@ namespace TCPingInfoView.Services
 			_configMonitor = this.WhenAnyValue(x => x.Config, x => x.Config.Servers)
 				.Throttle(TimeSpan.FromSeconds(1))
 				.DistinctUntilChanged()
-				.Where(_ => Config != null && !_lock.IsWriteLockHeld)
+				.Where(v => v.Item1 != null && !_lock.IsWriteLockHeld)
 				.Subscribe(_ =>
 				{
 					SaveAsync(default).ToObservable();
