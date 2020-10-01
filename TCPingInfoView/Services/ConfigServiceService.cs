@@ -4,13 +4,13 @@ using ReactiveUI;
 using System;
 using System.IO;
 using System.Reactive.Linq;
-using System.Reactive.Threading.Tasks;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using TCPingInfoView.Interfaces;
 using TCPingInfoView.Models;
+using TCPingInfoView.Utils;
 
 namespace TCPingInfoView.Services
 {
@@ -46,7 +46,7 @@ namespace TCPingInfoView.Services
 				.Where(v => v.Item1 != null && !_lock.IsWriteLockHeld)
 				.Subscribe(_ =>
 				{
-					SaveAsync(default).ToObservable();
+					SaveAsync(default).NoWarning();
 					_logger.LogDebug(@"Config Saved");
 				});
 		}
