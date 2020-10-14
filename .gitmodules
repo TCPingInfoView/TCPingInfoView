@@ -10,3 +10,6 @@
 [submodule "Build/TCPingClient"]
 	path = Build/TCPingClient
 	url = https://github.com/TCPingInfoView/TCPingClient
+[submodule "Build/GetSHA256"]
+	path = Build/GetSHA256
+	url = https://github.com/HMBSbige/GetSHA256
